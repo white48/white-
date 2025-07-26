@@ -1,0 +1,73 @@
+/* إعادة تعيين أساسية */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Cairo', 'Tahoma', sans-serif;
+  background: #f7f7f7;
+  color: #222;
+  direction: rtl;
+}
+
+header {
+  background: #395a93;
+  color: #fff;
+  padding: 1rem;
+  text-align: center;
+  
+}
+
+#products-container {
+  display: grid;
+  gap: 1rem;
+  padding: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.card {
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.card h2 {
+  margin: 0.5rem 0 0.25rem;
+  font-size: 1.1rem;
+}
+
+.price {
+  color: #25D366;
+  font-weight: bold;
+  margin-bottom: 0.75rem;
+}
+
+.order-btn {
+  width: 100%;
+  background: #25D366;
+  color: #fff;
+  border: none;
+  padding: 0.6rem 0;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.order-btn:hover {
+  background: #1ebe5d;
+}
+a {
+    text-align: left;
+    color: #cccde0;
+
+}

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head> <meta charset="UTF-8">
+  <title>النبيل للتجارة  و الاستيراد</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+      <link rel="stylesheet" href="style1.css">
+
+</head>
+<body>
+<header>
+
+      <h1>النبيل للتجارةوالاستيراد</h1>
+
+  <div class="search-container">
+    <input type="text" id="searchInput" placeholder="ابحث عن منتج...">
+    <button onclick="searchProduct()">بحث</button>
+  </div>
+
+    <a>منتجات</a>
+</header>
+<main id="products-container">
+
+</main>
+<script>
+    const sellerNumber ='967771166259';
+    const products=[
+
+      
+      {
+        name: 'لاصقات درجة اولى',
+        image: '1.jpg'
+      
+      
+
+
+
+      },
+ {
+        name: 'كرسي مكينه ',
+        price: 60,
+        image: '2.jpg'
+      
+      
+
+
+
+      },
+       {
+        name: 'بوشات مقص  ',
+        price: 60,
+        image: '3.jpg'
+      
+      
+
+
+
+      },
+       {
+        name: 'دبة ماء راجع ',
+        price: 60,
+        image: '4.jpg'
+      
+      
+
+
+
+      },
+       {
+        name: ' صدمات اماميه',
+        price: 60,
+        image: '5.jpg'
+      
+      
+
+
+
+      },
+       {
+        name: 'كشفات ضبابيه ',
+        price: 60,
+        image: '6.jpg'
+      
+      
+
+
+
+      },
+       {
+        name: 'اصتبات خلفيه ',
+        price: 60,
+        image: '7.jpg'
+      
+      
+
+
+
+      },
+       {
+        name: ' مرايات سيارات',
+        price: 60,
+        image: '8.jpg'
+      
+      
+
+
+
+      },
+       {
+        name: 'كشافات صالون 2018 ',
+        price: 60,
+        image: '9.jpg'
+      
+      
+
+
+
+      },
+
+
+    ];
+     
+
+
+
+
+    const container = document.getElementById('products-container');
+    products.forEach(prod => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `
+        <img src="${prod.image}" alt="${prod.name}">
+        <h2>${prod.name}</h2>
+        <button class="order-btn" data-name="${prod.name}" data-price="${prod.price}" data-img="${prod.image}">
+          طلب عبر واتساب
+        </button>
+      `;
+      container.appendChild(card);
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+document.addEventListener('click', e => {
+      if (e.target.classList.contains('order-btn')) {
+        const { name, price, img } = e.target.dataset;
+        const text = `مرحبًا، أرغب بطلب المنتج التالي:%0Aالاسم: ${name}%0Aالسعر: ${price} ريال`;
+        window.open(`https://wa.me/${sellerNumber}?text=${text}`, '_blank');
+      }
+    });
+</script>
+
+</body>
+
+
+
+
+</html>
