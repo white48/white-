@@ -1,0 +1,109 @@
+// Main.js for the front-end functionality
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Load products when page loads
+    loadProducts();
+    
+    // Handle WhatsApp order button click
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('order-whatsapp-btn')) {
+            e.preventDefault();
+            const productId = e.target.dataset.productId;
+            const productName = e.target.dataset.productName;
+            const productImage = e.target.dataset.productImage;
+            
+            // Generate WhatsApp URL
+            const waUrl = `https://wa.me/your_number?text=مرحبًا، أود طلب المنتج: ${productName} - الصورة: ${productImage}`;
+            window.open(waUrl, '_blank');
+        }
+    });
+    
+    // Function to load products from the database
+    function loadProducts() {
+        // In production, this would fetch from a backend API
+        // For demo purposes, we'll use sample data
+        const products = [
+            {
+                id: 1,
+                name: 'المنتج الأول',
+                description: 'هذا الوصف الكامل للمنتج الأول. منتج عالي الجودة ومميز',
+                price: 150,
+                images: [
+                    'https://via.placeholder.com/300x200?text=Product+1+Image+1',
+                    'https://via.placeholder.com/300x200?text=Product+1+Image+2',
+                    'https://via.placeholder.com/300x200?text=Product+1+Image+3'
+                ]
+            },
+            {
+                id: 2,
+                name: 'المنتج الثاني',
+                description: 'هذا الوصف الكامل للمنتج الثاني. منتج عالي الجودة ومميز',
+                price: 250,
+                images: [
+                    'https://via.placeholder.com/300x200?text=Product+2+Image+1',
+                    'https://via.placeholder.com/300x200?text=Product+2+Image+2',
+                    'https://via.placeholder.com/300x200?text=Product+2+Image+3'
+                ]
+            },
+            {
+                id: 3,
+                name: 'المنتج الثالث',
+                description: 'هذا الوصف الكامل للمنتج الثالث. منتج عالي الجودة ومميز',
+                price: 180,
+                images: [
+                    'https://via.placeholder.com/300x200?text=Product+3+Image+1',
+                    'https://via.placeholder.com/300x200?text=Product+3+Image+2',
+                    'https://via.placeholder.com/300x200?text=Product+3+Image+3'
+                ]
+            }
+        ];
+        
+        // Display products on the homepage
+        const productsContainer = document.getElementById('products-container');
+        if (productsContainer) {
+            productsContainer.innerHTML = '';
+            products.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.className = 'col-md-4 col-sm-6 mb-4';
+                productCard.innerHTML = `
+                    <div class="card product-card">
+                        <img src="${product.images[0]}" class="card-img-top product-image" alt="${product.name}">
+                        <div class="card-body">
+                            <h5 class="card-title product-name">${product.name}</h5>
+                            <p class="card-text product-price">${product.price} جنيه</p>
+                            <a href="product.html?id=${product.id}" class="btn details-btn">عرض التفاصيل</a>
+                        </div>
+                    </div>
+                `;
+                productsContainer.appendChild(productCard);
+            });
+        }
+        
+        // Display product details if on product page
+        const urlParams = new URLSearchParams(window.location.search);
+        const productId = urlParams.get('id');
+        
+        if (productId) {
+            const product = products.find(p => p.id == productId);
+            if (product) {
+                document.getElementById('product-name').textContent = product.name;
+                document.getElementById('product-description').textContent = product.description;
+                document.getElementById('product-price').textContent = `${product.price} جنيه`;
+                
+                // Setup WhatsApp order button
+                const waUrl = `https://wa.me/your_number?text=مرحبًا، أود طلب المنتج: ${product.name} - الصورة: ${product.images[0]}`;
+                document.getElementById('order-whatsapp').href = waUrl;
+                
+                // Setup product images carousel
+                const carouselInner = document.querySelector('#productCarousel .carousel-inner');
+                product.images.forEach((image, index) => {
+                    const isActive = index === 0 ? 'active' : '';
+                    const carouselItem = document.createElement('div');
+                    carouselItem.className = `carousel-item ${isActive}`;
+                    carouselItem.innerHTML = `<img src="${image}" class="d-block w-100" alt="${product.name} - صورة ${index + 1}">`;
+                    carouselInner.appendChild(carouselItem);
+                });
+            }
+        }
+    }
+});
