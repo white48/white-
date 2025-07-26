@@ -1,171 +1,146 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-<head> <meta charset="UTF-8">
-  <title>النبيل للتجارة  و الاستيراد</title>
+<head>
+  <meta charset="UTF-8">
+  <title>النبيل للتجارة والاستيراد</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="style.css">
-      <link rel="stylesheet" href="style1.css">
-
+  <link rel="stylesheet" href="style1.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f8f8;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #004b6b;
+      color: white;
+      padding: 15px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .search-container {
+      margin-top: 10px;
+    }
+    .search-container input {
+      padding: 8px;
+      width: 60%;
+      max-width: 300px;
+      border: none;
+      border-radius: 4px;
+    }
+    .search-container button {
+      padding: 8px 12px;
+      border: none;
+      background-color: #ff9800;
+      color: white;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    #products-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 20px;
+    }
+    .card {
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      margin: 10px;
+      width: 200px;
+      text-align: center;
+      overflow: hidden;
+      transition: transform 0.2s;
+    }
+    .card:hover {
+      transform: scale(1.03);
+    }
+    .card img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+    }
+    .card h2 {
+      font-size: 16px;
+      padding: 10px 5px;
+    }
+    .order-btn {
+      background-color: #25d366;
+      color: white;
+      border: none;
+      padding: 10px;
+      width: 100%;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .order-btn:hover {
+      background-color: #1ebe5d;
+    }
+  </style>
 </head>
 <body>
+
 <header>
-
-      <h1>النبيل للتجارةوالاستيراد</h1>
-
+  <h1>النبيل للتجارة والاستيراد</h1>
   <div class="search-container">
     <input type="text" id="searchInput" placeholder="ابحث عن منتج...">
     <button onclick="searchProduct()">بحث</button>
   </div>
-
-    <a>منتجات</a>
 </header>
-<main id="products-container">
 
-</main>
+<main id="products-container"></main>
+
 <script>
-    const sellerNumber ='967771166259';
-    const products=[
+  const sellerNumber = '967771166259';
 
-      
-      {
-        name: 'لاصقات درجة اولى',
-        image: '1.jpg'
-      
-      
+  const products = [
+    { name: 'لاصقات درجة اولى', image: '1.jpg' },
+    { name: 'كرسي مكينه', image: '2.jpg' },
+    { name: 'بوشات مقص', image: '3.jpg' },
+    { name: 'دبة ماء راجع', image: '4.jpg' },
+    { name: 'صدمات اماميه', image: '5.jpg' },
+    { name: 'كشفات ضبابيه', image: '6.jpg' },
+    { name: 'اصتبات خلفيه', image: '7.jpg' },
+    { name: 'مرايات سيارات', image: '8.jpg' },
+    { name: 'كشافات صالون 2018', image: '9.jpg' },
+  ];
 
+  const container = document.getElementById('products-container');
 
+  products.forEach(prod => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `
+      <img src="${prod.image}" alt="${prod.name}">
+      <h2>${prod.name}</h2>
+      <button class="order-btn" data-name="${prod.name}" data-img="${prod.image}">طلب عبر واتساب</button>
+    `;
+    container.appendChild(card);
+  });
 
-      },
- {
-        name: 'كرسي مكينه ',
-        price: 60,
-        image: '2.jpg'
-      
-      
+  document.addEventListener('click', e => {
+    if (e.target.classList.contains('order-btn')) {
+      const name = e.target.dataset.name;
+      const img = e.target.dataset.img;
+      const imgUrl = location.href + img;
+      const message = `مرحبًا، أرغب بطلب المنتج التالي:%0Aالاسم: ${name}%0Aرابط الصورة: ${imgUrl}`;
+      window.open(`https://wa.me/${sellerNumber}?text=${message}`, '_blank');
+    }
+  });
 
-
-
-      },
-       {
-        name: 'بوشات مقص  ',
-        price: 60,
-        image: '3.jpg'
-      
-      
-
-
-
-      },
-       {
-        name: 'دبة ماء راجع ',
-        price: 60,
-        image: '4.jpg'
-      
-      
-
-
-
-      },
-       {
-        name: ' صدمات اماميه',
-        price: 60,
-        image: '5.jpg'
-      
-      
-
-
-
-      },
-       {
-        name: 'كشفات ضبابيه ',
-        price: 60,
-        image: '6.jpg'
-      
-      
-
-
-
-      },
-       {
-        name: 'اصتبات خلفيه ',
-        price: 60,
-        image: '7.jpg'
-      
-      
-
-
-
-      },
-       {
-        name: ' مرايات سيارات',
-        price: 60,
-        image: '8.jpg'
-      
-      
-
-
-
-      },
-       {
-        name: 'كشافات صالون 2018 ',
-        price: 60,
-        image: '9.jpg'
-      
-      
-
-
-
-      },
-
-
-    ];
-     
-
-
-
-
-    const container = document.getElementById('products-container');
-    products.forEach(prod => {
-      const card = document.createElement('div');
-      card.className = 'card';
-      card.innerHTML = `
-        <img src="${prod.image}" alt="${prod.name}">
-        <h2>${prod.name}</h2>
-        <button class="order-btn" data-name="${prod.name}"  data-img="${prod.image}">
-          طلب عبر واتساب
-        </button>
-      `;
-      container.appendChild(card);
+  function searchProduct() {
+    const input = document.getElementById('searchInput').value.toLowerCase();
+    const cards = document.querySelectorAll('.card');
+    cards.forEach(card => {
+      const name = card.querySelector('h2').innerText.toLowerCase();
+      card.style.display = name.includes(input) ? 'block' : 'none';
     });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-document.addEventListener('click', e => {
-      if (e.target.classList.contains('order-btn')) {
-        const { name, price, img } = e.target.dataset;
-        const text = `مرحبًا، أرغب بطلب المنتج التالي:%0Aالاسم: ${name}%0Aالسعر: ${price} ريال`;
-        window.open(`https://wa.me/${sellerNumber}?text=${text}`, '_blank');
-      }
-    });
+  }
 </script>
 
 </body>
-
-
-
-
 </html>
