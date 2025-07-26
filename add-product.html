@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8"/>
+  <title>إضافة منتج جديد</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+<header>
+  <h1>إضافة منتج جديد</h1>
+  <a href="index.html">← العودة</a>
+</header>
+
+<form id="form">
+  <label>الاسم<input required name="name"></label>
+  <label>السعر<input required name="price" type="number" min="0"></label>
+  <label>رابط الصورة<input required name="image" type="url"></label>
+  <label>الوصف<textarea required name="desc"></textarea></label>
+  <button>حفظ المنتج</button>
+</form>
+
+<script type="module">
+import {loadProducts, saveProducts} from './store.js';
+
+document.getElementById('form').addEventListener('submit', e=>{
+  e.preventDefault();
+  const data = new FormData(e.target);
+  const list = loadProducts();
+  const newProd = {
+    id: Date.now(),
+    name: data.get('name'),
+    price: data.get('price'),
+    image: data.get('image'),
+    desc: data.get('desc')
+  };
+  list.push(newProd);
+  saveProducts(list);
+  alert('تم الحفظ! سيتم نقلك للرئيسية.');
+  location.href='index.html';
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8"/>
+  <title>تفاصيل المنتج</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+<header>
+  <h1 id="title">جارٍ التحميل...</h1>
+  <a href="index.html">← العودة</a>
+</header>
+
+<main id="detail"></main>
+
+<script type="module">
+import {loadProducts, WHATSAPP} from './store.js';
+
+const id = +new URLSearchParams(location.search).get('id');
+const p = loadProducts().find(i=>i.id===id);
+if(!p){ document.body.innerHTML='<h2>المنتج غير موجود</h2>'; }
+
+document.getElementById('title').textContent = p.name;
+document.getElementById('detail').innerHTML = `
+  <img src="${p.image}" alt="">
+  <p><strong>السعر:</strong> ${p.price} ر.ي</p>
+  <p><strong>الوصف:</strong> ${p.desc}</p>
+  <button class="order-btn" onclick="order()">طلب عبر واتساب</button>
+`;
+
+window.order = ()=>{
+  const txt = `مرحبًا، أرغب بطلب المنتج:%0Aالاسم: ${p.name}%0Aالسعر: ${p.price} ر.ي`;
+  window.open(`https://wa.me/${WHATSAPP}?text=${txt}`, '_blank');
+};
+</script>
+</body>
+</html>
