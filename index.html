@@ -1,50 +1,49 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="utf-8"/>
-  <title>النبيل للتجارة والاستيراد</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <link rel="stylesheet" href="style.css"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>النبيل للتجارة والاستيراد  ي</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-<header>
-  <h1>النبيل للتجارة والاستيراد</h1>
-  <nav>
-    <a href="add-product.html">➕ إضافة منتج</a>
-  </nav>
-  <div class="search-container">
-    <input id="search" placeholder="ابحث عن منتج...">
-    <button onclick="filter()">بحث</button>
-  </div>
-</header>
+    <header class="bg-white shadow-sm sticky-top">
+        <nav class="container py-3">
+            <div class="d-flex justify-content-between align-items-center">
+                <h1 class="logo text-primary fw-bold">النبيل</h1>
+                <div class="search-bar">
+                    <input type="text" class="form-control" placeholder="ابحث عن منتج...">
+                </div>
+                <div class="contact-btn ms-3">
+                    <a href="https://wa.me/your_number" class="btn btn-success">
+                        <i class="bi bi-whatsapp"></i> اتصل بنا
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
 
-<main id="list"></main>
+    <main class="py-5">
+        <section class="container">
+            <h2 class="text-center mb-5">منتجاتنا</h2>
+            <div class="row" id="products-container">
+                <!-- Products will be loaded here dynamically -->
+            </div>
+        </section>
+    </main>
 
-<script type="module">
-import {loadProducts} from './store.js';
+    <footer class="bg-dark text-white py-4">
+        <div class="container text-center">
+            <p class="mb-0">© 2023 النبيل. جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
 
-function render(list){
-  const box = document.getElementById('list');
-  box.innerHTML = '';
-  list.forEach(p=>{
-    const card = document.createElement('div');
-    card.className='card';
-    card.innerHTML = `
-      <img src="${p.image}" alt="">
-      <h2>${p.name}</h2>
-      <a class="details" href="product.html?id=${p.id}">عرض التفاصيل</a>
-    `;
-    box.appendChild(card);
-  });
-}
-
-render(loadProducts());
-
-window.filter = ()=>{
-  const q = document.getElementById('search').value.toLowerCase();
-  const filtered = loadProducts().filter(p=>p.name.toLowerCase().includes(q));
-  render(filtered);
-};
-</script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>
