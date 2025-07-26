@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>النبيل للتجارة والاستيراد  ي</title>
+    <title>النبيل - متجر إلكتروني احترافي</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="css/style.css">
@@ -15,13 +15,13 @@
     <header class="bg-white shadow-sm sticky-top">
         <nav class="container py-3">
             <div class="d-flex justify-content-between align-items-center">
-                <h1 class="logo text-primary fw-bold">النبيل</h1>
+                <h1 class="logo text-primary fw-bold" id="adminAccess">النبيل</h1>
                 <div class="search-bar">
                     <input type="text" class="form-control" placeholder="ابحث عن منتج...">
                 </div>
                 <div class="contact-btn ms-3">
                     <a href="https://wa.me/your_number" class="btn btn-success">
-                        <i class="bi bi-whatsapp"></i> اتصل بنا
+                        <i class=" bibi-whatsapp"></i> اتصل بنا
                     </a>
                 </div>
             </div>
@@ -44,6 +44,32 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/main.js"></script>
+    <script>
+        // Add event listener for long press on the logo
+        const adminAccess = document.getElementById('adminAccess');
+        let pressTimer;
+
+        adminAccess.addEventListener('mousedown', function() {
+            pressTimer = window.setTimeout(function() {
+                window.location.href = 'admin/login.html';
+            }, 1500); // 1.5 seconds press
+        });
+
+        adminAccess.addEventListener('mouseup', function() {
+            clearTimeout(pressTimer);
+        });
+
+        // For mobile devices
+        adminAccess.addEventListener('touchstart', function(e) {
+            pressTimer = window.setTimeout(function() {
+                window.location.href = 'admin/login.html';
+            }, 1500); // 1.5 seconds press
+            e.preventDefault();
+        });
+
+        adminAccess.addEventListener('touchend', function() {
+            clearTimeout(pressTimer);
+        });
+    </script>
 </body>
 </html>
